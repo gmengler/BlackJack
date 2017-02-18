@@ -1,22 +1,26 @@
 package game;
 
 public class Player {
-	Hand h = new Hand();
+	Hand hand;
 	private String name;
 	private Double wallet;
 	
-	public void placeWager(int wager) {
-		
+	public Player(){
+		 this.hand = new Hand();
 	}
 
-	public Player(String name, Double wallet) {
+	public Player(String name, Double wallet, Hand hand) {
 		super();
 		this.name = name;
 		this.wallet = wallet;
+		this.hand = new Hand();
 	}
 
-	public Hand getH() {
-		return h;
+	public void placeWager(int wager) {
+		
+	}
+	public Hand getHand() {
+		return hand;
 	}
 
 	public String getName() {

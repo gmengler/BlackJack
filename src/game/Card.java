@@ -22,7 +22,7 @@ public class Card implements Comparable<Card> {
 	
 	@Override
 	public String toString() {
-		return "Card [rank=" + rank + ", suit=" + suit + ", value=" + value + "]";
+		return "Card rank: " + rank + " || Suit: " + suit + " || Value: " + value;
 	}
 	
 	@Override

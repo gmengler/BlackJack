@@ -12,7 +12,7 @@ public class Deck {
 
 	int numDelt;
 
-	public void Cards() {
+	public void createDeck() {
 		int counter = 1;
 
 		for (Rank r : Rank.values()) {
@@ -31,7 +31,8 @@ public class Deck {
 
 	}
 
-	public Card dealCard() {
+	public Card dealCard(Player p) {
+		p.getHand().addCard(deck.get(0));
 		return deck.remove(0);
 	}
 

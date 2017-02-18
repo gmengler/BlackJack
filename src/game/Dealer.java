@@ -1,10 +1,11 @@
 package game;
 
 public class Dealer extends Player {
-	Hand h = new Hand();
-
-	public Dealer(String name, Double wallet) {
-		super(name, wallet);
+	public Dealer(String name, Double wallet, Hand hand) {
+		super(name, wallet, hand);
 	}
+	Hand h = new Hand();
 	
+	
+
 }
