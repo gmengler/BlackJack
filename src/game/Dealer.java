@@ -6,6 +6,4 @@ public class Dealer extends Player {
 	}
 	Hand h = new Hand();
 	
-	
-
 }

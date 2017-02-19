@@ -3,7 +3,7 @@ package game;
 import java.util.Scanner;
 
 public class Game {
-	public static void main(String[] args) {
+	public void playGame() {
 		Game game = new Game();
 		Deck deck = new Deck();
 		deck.createDeck();
@@ -14,17 +14,20 @@ public class Game {
 		deck.dealCard(dealer);
 		deck.dealCard(dealer);
 
+		System.out.println("Player's cards:");
 		for (Card c : player.getHand().getCards()) {
 			System.out.println(c);
 		}
-		System.out.println("Player total: " + game.handTotal(player));
+		System.out.println("Player total: " + game.handTotal(player) + "\n");
+		
+		System.out.println("Dealer's cards:");
 		for (Card c : dealer.getHand().getCards()) {
 			System.out.println(c);
 		}
 		System.out.println("Dealer total: " + game.handTotal(dealer));
 		System.out.println();
 		
-		game.userPlay(game, dealer, dealer, deck);
+		game.userPlay(game, player, dealer, deck);
 
 	}
 
@@ -35,43 +38,52 @@ public class Game {
 		boolean userKeepPlaying = true;
 		boolean dealerKeepPlaying = true;
 
-		while (keepPlaying = true) {
+		while (keepPlaying == true) {
 
-			while (userKeepPlaying = true) {
+			while (userKeepPlaying) {
 				if (game.handTotal(player) < 21) {
 					System.out.println("Hit or stay?");
 					input = kb.next();
 					if (input.equalsIgnoreCase("Hit")) {
 						Card c = deck.dealCard(player);
 						System.out.println("Player's new card: " + c);
+						for (Card d : player.getHand().getCards()) {
+							System.out.println(d);
+						}
 						System.out.println("New total: " + game.handTotal(player));
 					}
 					if (input.equalsIgnoreCase("Stay")) {
-						break;
+						userKeepPlaying = false;
 					}
 				} else if (game.handTotal(player) > 21) {
 					System.out.println("Over twenty one, you busted, dealer wins.");
 					userKeepPlaying = false;
-				} else if (game.handTotal(player) == 21) {
-					System.out.println("21!  You win.");
-					userKeepPlaying = false;
-				}
+					dealerKeepPlaying = false;
+					keepPlaying = false;
+				} 
 			}
-			while (dealerKeepPlaying = true) {
+			System.out.println(dealerKeepPlaying);
+			while (dealerKeepPlaying) {
 				if (game.handTotal(dealer) <= 16) {
 					Card c = deck.dealCard(dealer);
 					System.out.println("Dealer's new card: " + c);
 					System.out.println("Dealer total: " + game.handTotal(dealer));
 				}
-				if (game.handTotal(dealer) > 21) {
+				else if (game.handTotal(dealer) > 21) {
 					System.out.println("Dealer busts, you win.");
 					dealerKeepPlaying = false;
-				} else if (game.handTotal(dealer) == 21) {
-					System.out.println("Dealer wins.");
-					dealerKeepPlaying = false;
+					keepPlaying = false;
+				} 
+				else{
+					dealerKeepPlaying=false;
 				}
 			}
-		}
+			if(handTotal(player)<= 21 && handTotal(dealer)<=21){
+				determineWinner(player,dealer);
+				
+			}
+			keepPlaying = false;
+		} 
 	}
 
 	public double handTotal(Player player) {
@@ -80,6 +92,18 @@ public class Game {
 			handTotal = handTotal + c.getValue();
 		}
 		return handTotal;
+	}
+	
+	public void determineWinner(Player player, Player dealer) {
+		if (handTotal(player) > handTotal(dealer)) {
+			System.out.println("You win!");
+		}
+		else if (handTotal(dealer) > handTotal(player)) {
+			System.out.println("Dealer wins.");
+		}
+		else{
+			System.out.println("Push");
+		}
 	}
 
 
